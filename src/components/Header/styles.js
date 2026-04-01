@@ -7,5 +7,4 @@ export const Container = styled.header`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-
+`;

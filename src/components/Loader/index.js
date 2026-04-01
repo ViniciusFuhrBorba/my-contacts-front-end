@@ -8,6 +8,5 @@ export default function Loader() {
       <div className="loader" />
     </Overlay>,
     document.getElementById("loader-root")
-  )
-};
-
+  );
+}

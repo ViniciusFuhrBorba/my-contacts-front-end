@@ -7,4 +7,4 @@ export default function FormGroup({ children, error }) {
       {error && <small>{error}</small>}
     </Container>
   );
-};
+}
