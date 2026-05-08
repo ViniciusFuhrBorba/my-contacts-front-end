@@ -10,6 +10,7 @@ import Input from "../Input";
 import Select from "../Select";
 import Button from "../Button";
 import isEmailValid from "../../utils/isEmailValid";
+import formatPhone from "../../utils/formatPhone";
 
 export default function ContactForm({ buttonLabel }) {
   /* Uncontrolled components
@@ -25,7 +26,10 @@ export default function ContactForm({ buttonLabel }) {
   const [phone, setPhone] = useState("");
   const [category, setCategory] = useState("");
 
-  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
+  const { errors, setError, removeError, getErrorMessageByFieldName } =
+    useErrors();
+
+  const isFormValid = name && errors.length === 0;
 
   function handleNameChange(event) {
     setName(event.target.value);
@@ -48,7 +52,7 @@ export default function ContactForm({ buttonLabel }) {
   }
 
   function handlePhoneChange(event) {
-    setPhone(event.target.value);
+    setPhone(formatPhone(event.target.value));
   }
 
   function handleCategoryChange(event) {
@@ -66,10 +70,10 @@ export default function ContactForm({ buttonLabel }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName("name")}>
         <Input
-          placeholder="Nome"
+          placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
           error={getErrorMessageByFieldName("name")}
@@ -77,6 +81,7 @@ export default function ContactForm({ buttonLabel }) {
       </FormGroup>
       <FormGroup error={getErrorMessageByFieldName("email")}>
         <Input
+          type="email"
           placeholder="E-mail"
           value={email}
           onChange={handleEmailChange}
@@ -88,6 +93,7 @@ export default function ContactForm({ buttonLabel }) {
           placeholder="Telefone"
           value={phone}
           onChange={handlePhoneChange}
+          maxLength="15"
         />
       </FormGroup>
       <FormGroup>
@@ -98,7 +104,9 @@ export default function ContactForm({ buttonLabel }) {
         </Select>
       </FormGroup>
       <ButtonContainer>
-        <Button type="submit">{buttonLabel}</Button>
+        <Button type="submit" disabled={!isFormValid}>
+          {buttonLabel}
+        </Button>
       </ButtonContainer>
     </Form>
   );
