@@ -10,7 +10,7 @@ export const InputSearchContainer = styled.div`
 
   input {
     width: 100%;
-    background: #FFF;
+    background: #fff;
     border: none;
     border-radius: 25px;
     height: 50px;
@@ -19,10 +19,10 @@ export const InputSearchContainer = styled.div`
     padding: 0 16px;
 
     &::placeholder {
-      color: #BCBCBC;
+      color: #bcbcbc;
     }
   }
-`
+`;
 
 export const Header = styled.header`
   display: flex;
@@ -45,33 +45,32 @@ export const Header = styled.header`
 
     &:hover {
       background: ${({ theme }) => theme.colors.primary.main};
-      color: #FFF;
+      color: #fff;
     }
   }
 `;
 
-export const ListContainer = styled.div`
+export const ListHeader = styled.header`
   margin-top: 24px;
+  margin-bottom: 8px;
 
-  header {
+  button {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
 
-    margin-bottom: 8px;
-
-    button{
-
-      background: transparent;
-      border: none;
-      display: flex;
-      align-items: center;
-
-      span {
-        color: ${({ theme }) => theme.colors.primary.main};
-        margin-right: 8px;
-        font-weight: bold;
-      }
-
+    span {
+      color: ${({ theme }) => theme.colors.primary.main};
+      margin-right: 8px;
+      font-weight: bold;
     }
 
+    img {
+      transform: ${({ $orderBy }) =>
+        $orderBy === "asc" ? "rotate(-180deg)" : "rotate(0deg)"};
+      transition: transform 0.2s ease-in;
+    }
   }
 `;
 
@@ -90,7 +89,6 @@ export const Card = styled.div`
   }
 
   .info {
-
     .contact-name {
       display: flex;
       align-items: center;
@@ -104,7 +102,6 @@ export const Card = styled.div`
         border-radius: 4px;
         margin-left: 8px;
       }
-
     }
 
     span {
@@ -112,7 +109,6 @@ export const Card = styled.div`
       font-size: 14px;
       color: ${({ theme }) => theme.colors.gray[200]};
     }
-
   }
 
   .actions {
@@ -124,6 +120,5 @@ export const Card = styled.div`
       border: none;
       margin-left: 8px;
     }
-
   }
 `;
